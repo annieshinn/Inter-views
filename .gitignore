@@ -2,16 +2,6 @@
 # Dependency directories
 node_modules/
 
-jspm_packages/
+dist 
 
-# TypeScript v1 declaration files
-typings/
-
-# TypeScript cache
-*.tsbuildinfo
-
-# Optional npm cache directory
-.npm
-
-# Optional eslint cache
-.eslintcache
+package-lock.json
