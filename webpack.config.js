@@ -42,12 +42,3 @@ module.exports = {
     }
   },
 };
-
-//nodemon file contents
-
-// {
-//   "watch": ["src"],
-//   "ext": "ts,json",
-//   "ignore": ["src/**/*.spec.ts"],
-//   "exec": "ts-node ./src/index.ts"      
-// }

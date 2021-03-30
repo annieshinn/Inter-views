@@ -1,12 +1,12 @@
 {
-  "name": "reinforcement",
+  "name": "Inter-views",
   "version": "1.0.0",
-  "description": "reinforcement project repo",
+  "description": "web app to track application and interview status and analytics",
   "main": "Main.tsx",
   "scripts": {
     "test": "",
     "build": "cross-env NODE_ENV=production webpack",
-    "start": "ts-node server/server.ts",
+    "start": "cross-env NODE_ENV=production ts-node server/server.ts",
     "dev": "cross-env NODE_ENV=development concurrently \"nodemon server/server.ts\" \"webpack serve --open --hot\""
   },
   "author": "",
