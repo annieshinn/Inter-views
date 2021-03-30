@@ -2,22 +2,16 @@
   "name": "reinforcement",
   "version": "1.0.0",
   "description": "reinforcement project repo",
-  "main": "index.js",
+  "main": "Main.tsx",
   "scripts": {
     "test": "",
     "build": "cross-env NODE_ENV=production webpack",
     "start": "ts-node server/server.ts",
-    "dev": "cross-env NODE_ENV=development concurrently \"nodemon --config nodemon.json server/server.ts\" \"webpack serve --open --hot\""
+    "dev": "cross-env NODE_ENV=development concurrently \"nodemon server/server.ts\" \"webpack serve --open --hot\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.9.0",
-    "@babel/plugin-transform-runtime": "^7.13.10",
-    "@babel/preset-env": "^7.9.5",
-    "@babel/preset-react": "^7.9.4",
-    "@babel/preset-typescript": "^7.13.0",
-    "@babel/runtime": "^7.13.10",
     "@types/body-parser": "^1.19.0",
     "@types/express": "^4.17.11",
     "@types/jest": "^26.0.21",
@@ -36,9 +30,7 @@
     "redux": "^4.0.5",
     "typescript": "^4.2.3",
     "ts-loader": "^8.0.17",
-    "url-loader": "^4.1.1",
-    "babel-loader": "^8.1.0",
-    "html-webpack-plugin": "^4.2.0"
+    "url-loader": "^4.1.1"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.20.0",

@@ -1,12 +1,11 @@
 const path = require('path');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
     mainFields: ["main", "module", "browser"],
   },
-  entry: './src/main.tsx',
+  entry: './src/Main.tsx',
   mode: process.env.NODE_ENV,
   output: {
     filename: 'bundle.js',
@@ -18,7 +17,7 @@ module.exports = {
         test: /\.(js|ts|tsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: "ts-loader",
         },
       },
       {
@@ -34,8 +33,6 @@ module.exports = {
     ],
   },
   devServer: {
-    host:'localhost',
-    publicPath:'/dist',
     hot: true,
     contentBase: path.join(__dirname, 'dist'),
     port: 8000,
@@ -44,7 +41,6 @@ module.exports = {
       "*": "http://localhost:3000"
     }
   },
-  plugins: [new HtmlWebpackPlugin()],
 };
 
 //nodemon file contents
