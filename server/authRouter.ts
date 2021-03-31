@@ -8,10 +8,18 @@ import express, { Request, Response, NextFunction, Errback } from "express";
 const authRouter = express.Router()
 const authController = require('./authController.ts')
 
-authRouter.post('/',
+// POST to /auth/login
+authRouter.post('/login',
   authController.login,
-  (req: any, res: any, next: any) => {
+  (req: Request, res: Response, next: NextFunction) => {
     res.json(res.locals.message)
 });
+
+// POST to /auth/signup
+authRouter.post('/signup',
+  authController.signup, 
+  (req: Request, res: Response, next: NextFunction) => {
+    res.json(res.locals.user)
+})
 
 module.exports = authRouter;

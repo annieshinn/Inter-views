@@ -5,11 +5,12 @@
  *
  */
 
-const express = require('express')
+import express, { Request, Response, NextFunction, Errback } from "express";
 const db = require('./models/dataModels.ts')
 
 const authController = {
-  login: function(req: any, res: any, next: any): any { }
+  login: function(req: Request, res: Response, next: NextFunction): any { },
+  signup: function(req: Request, res: Response, next: NextFunction): any { }
 };
 
 authController.login = (req, res, next) => {
@@ -44,5 +45,22 @@ authController.login = (req, res, next) => {
       })
     });
 };
+
+authController.signup = (req, res, next) => {
+  const {username, password, email } = req.body
+  const signup = 'INSERT INTO users(username, password, email) VALUES($1, $2, $3) RETURNING *'
+  db.query(signup, [username, password, email])
+    .then((data: any) => {
+      res.locals.user = data.rows[0]
+      return next()
+    })
+    .catch((err: any) => {
+      return next({
+        log: 'Error in authController.signup',
+        status: 500,
+        message: {err},
+      })
+    })
+}
 
 module.exports = authController;
