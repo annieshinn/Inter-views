@@ -20,6 +20,9 @@ app.get('/', (req: Request, res: Response) => {
   return res.sendFile(path.join(__dirname, '../index.html'));
 });
 
+/* ROUTERS */
+app.use('/auth', authRouter);
+
 /* 404 REQUEST NOT FOUND */
 app.use('*', (req: Request, res: Response) => {
   res.status(404).send('requested file not found')

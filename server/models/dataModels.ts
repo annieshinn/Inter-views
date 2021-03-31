@@ -1,13 +1,11 @@
 const { Pool } = require('pg')
 const env = require('dotenv').config();
 
-const URI = process.env.PG_URI;
+const connectionString = process.env.PG_URI;
 
-// console.log(URI);
-
- // initialize the pool
+// initialize the pool
 const pool = new Pool({
-  connectionString: URL,
+  connectionString,
 })
 
 // export your model
