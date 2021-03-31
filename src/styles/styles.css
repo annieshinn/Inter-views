@@ -18,10 +18,20 @@ body{
 
   display: flex;
   flex-direction: column;
-  align-items: center
+  align-items: center;
+  text-align: center;
 }
 
 .login {
   margin: 15px;
 }
 
+#oauth {
+  /* background-image: url('https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/dog_cool_summer_slideshow/1800x1200_dog_cool_summer_other.jpg'); */
+  /* TO BE CONTINUED -- not working rn */
+  /* background-image: url('/src/images/googleButton/darkNormal.png'); */
+  /* background-size: contain; */
+  
+  /* width: 200px;
+  height: 200px; */
+}
