@@ -1,16 +1,23 @@
-import React, { SyntheticEvent} from 'react';
+import React, { SyntheticEvent } from 'react';
 import helpers from '../helpers/fetchOptions';
 import ReactModal from 'react-modal';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleModal, toggleActionCreator } from '../slices/dashboardSlice';
+import store from '../store';
 
 const Dashboard = () => {
 
-  function handleAddCard(event: SyntheticEvent) {
-    event.preventDefault();
-
-    const options = helpers.makeFetchJSONRequest('', 'data', 'GET');
-    return
-  }
+  const dispatch = useDispatch();
+  const action = toggleActionCreator(true);
+  // const modalValue = useSelector(state => state.modalIsOpen.value)
   
+  function showAddCard(event: SyntheticEvent) {
+    event.preventDefault();
+    console.log(store.getState());
+    dispatch(action);
+    console.log("AFTER ACTION", store.getState());
+  }
+
   const customStyles = {
     overlay: {zIndex: 1000}
   }
@@ -18,10 +25,10 @@ const Dashboard = () => {
   return (
     <div>
       <form> 
-        <button type="submit" className="login" onClick={handleAddCard}>Add Application</button> 
+        <button type="submit" className="login" onClick={showAddCard}>Add Application</button> 
       </form> 
-      <ReactModal style={customStyles}>
-        {/* card creation here */}
+      <ReactModal isOpen={false} style={customStyles}>
+        HEY I RENDER
       </ReactModal>
     </div>
   )

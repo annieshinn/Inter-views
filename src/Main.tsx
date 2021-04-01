@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 import App from './App';
-import store from './store';
+import state from './store';
 import { Provider } from 'react-redux';
 
 const mainElement = document.createElement('div');
@@ -13,9 +13,9 @@ class Main extends Component {
 
   }
   render() {
-
+    console.log(state);
     return (
-      <Provider store={store}>
+      <Provider store={state}>
         <App />
       </Provider>
     )
