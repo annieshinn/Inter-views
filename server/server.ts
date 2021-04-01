@@ -1,5 +1,7 @@
 import express, { Request, Response, NextFunction, Errback } from "express";
 import path from "path";
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const authRouter = require('./authRouter')
 
 const PORT = 3000;
@@ -22,6 +24,19 @@ app.get('/', (req: Request, res: Response) => {
 
 /* ROUTERS */
 app.use('/auth', authRouter);
+
+/* OAUTH */
+passport.use(new GoogleStrategy({
+    clientID: 'GOOGLE_CLIENT_ID',
+    clientSecret: 'GOOGLE_CLIENT_SECRET',
+    callbackURL: "http://www.example.com/auth/google/callback"
+  },
+  function(accessToken: any, refreshToken: any, profile: any, cb: any) {
+    User.findOrCreate({ googleId: profile.id }, function (err: any, user: any) {
+      return cb(err, user);
+    });
+  }
+));
 
 /* 404 REQUEST NOT FOUND */
 app.use('*', (req: Request, res: Response) => {
