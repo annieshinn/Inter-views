@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction, Errback } from "express";
 import path from "path";
-const authRouter = require('./authRouter')
+const authRouter = require('./routers/authRouter');
+const cardRouter = require('./routers/cardRouter');
 
 const PORT = 3000;
 const app = express();
@@ -26,6 +27,7 @@ app.get('/home', (req: Request, res: Response) => {
 
 /* ROUTERS */
 app.use('/auth', authRouter);
+app.use('/card', cardRouter);
 
 /* 404 REQUEST NOT FOUND */
 app.use('*', (req: Request, res: Response) => {
@@ -47,4 +49,3 @@ app.use((err, req: Request, res: Response) => {
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`)
 });
-
