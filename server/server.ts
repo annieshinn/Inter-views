@@ -27,14 +27,14 @@ app.use('/auth', authRouter);
 
 /* OAUTH */
 passport.use(new GoogleStrategy({
-    clientID: 'GOOGLE_CLIENT_ID',
-    clientSecret: 'GOOGLE_CLIENT_SECRET',
-    callbackURL: "http://www.example.com/auth/google/callback"
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: "http://www.example.com/auth/google/callback" // we need to replace this
   },
   function(accessToken: any, refreshToken: any, profile: any, cb: any) {
-    User.findOrCreate({ googleId: profile.id }, function (err: any, user: any) {
-      return cb(err, user);
-    });
+    // User.findOrCreate({ googleId: profile.id }, function (err: any, user: any) {
+    //   return cb(err, user);
+    // });
   }
 ));
 
