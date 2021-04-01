@@ -78,7 +78,10 @@ cardController.deleteCard = (req, res, next) => {
 
 cardController.updateCard = (req, res, next) => {
   const { id } = req.params
-  const { company, event_name, event_date, phone_screen, tech_interview, status='pending', user_id } = req.body
+  const idCookie = req.headers.cookie;
+  const user_id = idCookie?.split('=').pop();
+
+  const { company, event_name, event_date, phone_screen, tech_interview, status='pending' } = req.body
   const deleteCard = 'UPDATE opportunity \
     SET company = $2, event_name = $3, event_date = $4, phone_screen = $5, tech_interview = $6, status = $7, user_id = $8 \
     WHERE _id = $1 RETURNING *'
