@@ -13,7 +13,10 @@ const Login = () => {
 
         <button type="submit" className="login">Login</button> 
         
-        <button id="oauth" type="submit" className="login">OAuth</button> 
+        <button id="oauth" type="submit" className="login">OAuth</button>
+        <br/>
+
+        <a href="/signup">click here to sign up</a>
       </form> 
     </div> 
   )

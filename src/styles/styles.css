@@ -2,6 +2,11 @@ body{
   background-color: lightblue;
 }
 
+a{
+  font-size: 15px;
+  color: black;
+}
+
 .formContainer {
   position: relative;
   top: 200px;
