@@ -30,12 +30,12 @@ function(accessToken: any, refreshToken: any, profile: any, cb: any) {
 authRouter.post('/login',
   authController.login,
   (req: Request, res: Response) => {
-    res.json(res.locals.message)
+    res.cookie('id', res.locals.id, {httpOnly: true}).json(res.locals.message)
 });
 
 // POST to /auth/signup
 authRouter.post('/signup',
-  authController.signup, 
+  authController.signup,
   (req: Request, res: Response) => {
     res.json(res.locals.user)
 })

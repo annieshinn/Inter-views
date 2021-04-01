@@ -18,7 +18,7 @@ const authController = {
 
 authController.login = (req, res, next) => {
   const { username, password } = req.body;
-  const checkUser = 'SELECT username, password FROM users WHERE username = $1';
+  const checkUser = 'SELECT username, password, _id FROM users WHERE username = $1';
 
   db.query(checkUser, [username])
     .then(async (data: any) => {
@@ -40,6 +40,7 @@ authController.login = (req, res, next) => {
       // check that password is correct
       if (match) {
         res.locals.message = 'logged in!';
+        res.locals.id = data.rows[0]._id;
         return next();
       }
 
