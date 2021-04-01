@@ -6,7 +6,7 @@
  */
 
 import express, { Request, Response, NextFunction, Errback } from "express";
-const db = require('./models/dataModels.ts')
+const db = require('../dataModels.ts')
 const bcrypt = require('bcrypt')
 const saltRounds = 10;
 

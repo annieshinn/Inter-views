@@ -6,15 +6,15 @@
 
 import express, { Request, Response } from "express";
 const authRouter = express.Router()
-const authController = require('./authController.ts')
+const authController = require('../controllers/authController.ts')
 
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 /* OAUTH */
 passport.use(new GoogleStrategy({
-  clientID: process.env.GOOGLE_CLIENT_ID,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  clientID: '554937945719-uhft55oe7gf10a2f6s070ronf6m6g6jl.apps.googleusercontent.com',
+  clientSecret: 'BmCZCKPXLHw9kIPw7I9KKFm0',
   callbackURL: "http://localhost:8000/home"
 },
 function(accessToken: any, refreshToken: any, profile: any, cb: any) {
