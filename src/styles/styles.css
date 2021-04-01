@@ -1,3 +1,37 @@
 body{
-  background-color:blue;
+  background-color: lightblue;
+}
+
+.formContainer {
+  position: relative;
+  top: 200px;
+  width: 150px;
+  margin: auto;
+  padding: 3.5rem;
+
+  background-color: rgba(15,49,129,.9);
+  box-shadow: 0 15px 25px rgb(0 0 0 / 60%);
+  border-radius: 10px;
+  color: #ffff;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 1.5em;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.login {
+  margin: 15px;
+}
+
+#oauth {
+  /* background-image: url('https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/dog_cool_summer_slideshow/1800x1200_dog_cool_summer_other.jpg'); */
+  /* TO BE CONTINUED -- not working rn */
+  /* background-image: url('/src/images/googleButton/darkNormal.png'); */
+  /* background-size: contain; */
+  
+  /* width: 200px;
+  height: 200px; */
 }
