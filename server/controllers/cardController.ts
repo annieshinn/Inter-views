@@ -54,4 +54,21 @@ cardController.getCards = (req, res, next) => {
     });
 };
 
+cardController.deleteCard = (req, res, next) => {
+  const { id } = req.params // this is the id of the card to be deleted
+  const deleteCard = 'DELETE FROM opportunity WHERE _id = $1'
+
+  db.query(deleteCard, [id])
+    .then((data: any) => {
+      return next()
+    })
+    .catch((err: any) => {
+      return next({
+         log: 'Error in cardController.deleteCard',
+         status: 500,
+         message: {err},
+      })
+    });
+};
+
 module.exports = cardController;

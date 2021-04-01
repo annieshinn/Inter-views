@@ -23,8 +23,8 @@ cardRouter.get('/:id',
 });
 
 // DELETE to delete a singular card
-cardRouter.delete('/',
-  // cardController.deleteCard,
+cardRouter.delete('/:id',
+  cardController.deleteCard,
   (req: Request, res: Response) => {
     res.json({message: 'card deleted'})
 });
