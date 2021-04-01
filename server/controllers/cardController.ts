@@ -12,7 +12,8 @@ const db = require('../dataModels')
 const cardController = {
   addCard: function(req: Request, res: Response, next: NextFunction): any { },
   getCards: function(req: Request, res: Response, next: NextFunction): any { },
-  deleteCard: function(req: Request, res: Response, next: NextFunction): any { }
+  deleteCard: function(req: Request, res: Response, next: NextFunction): any { },
+  updateCard: function(req: Request, res: Response, next: NextFunction): any { },
 };
 
 cardController.addCard = (req, res, next) => {
@@ -55,7 +56,7 @@ cardController.getCards = (req, res, next) => {
 };
 
 cardController.deleteCard = (req, res, next) => {
-  const { id } = req.params // this is the id of the card to be deleted
+  const { id } = req.params 
   const deleteCard = 'DELETE FROM opportunity WHERE _id = $1'
 
   db.query(deleteCard, [id])
@@ -65,6 +66,27 @@ cardController.deleteCard = (req, res, next) => {
     .catch((err: any) => {
       return next({
          log: 'Error in cardController.deleteCard',
+         status: 500,
+         message: {err},
+      })
+    });
+};
+
+cardController.updateCard = (req, res, next) => {
+  const { id } = req.params
+  const { company, event_name, event_date, phone_screen, tech_interview, status='pending', user_id } = req.body
+  const deleteCard = 'UPDATE opportunity \
+    SET company = $2, event_name = $3, event_date = $4, phone_screen = $5, tech_interview = $6, status = $7, user_id = $8 \
+    WHERE _id = $1 RETURNING *'
+
+  db.query(deleteCard, [id, company, event_name, event_date, phone_screen, tech_interview, status, user_id])
+    .then((data: any) => {
+      res.locals.updatedCard = data.rows[0];
+      return next();
+    })
+    .catch((err: any) => {
+      return next({
+         log: 'Error in cardController.updateCard',
          status: 500,
          message: {err},
       })

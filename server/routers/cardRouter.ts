@@ -30,8 +30,8 @@ cardRouter.delete('/:id',
 });
 
 // UPDATE a card
-cardRouter.put('/',
-  // cardController.updateCard,
+cardRouter.put('/:id',
+  cardController.updateCard,
   (req: Request, res: Response) => {
     res.json(res.locals.updatedCard)
 });
