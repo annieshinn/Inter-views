@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction, createAction } from '@reduxjs/toolkit';
 
 export interface dashboardState {
-  modalIsOpen: boolean
+  renderModal: boolean
 }
 
 export const toggleActionCreator = createAction<boolean>('modalIsOpen/toggleModal');
 
 
 const initialState:dashboardState = {
-  modalIsOpen: false
+  renderModal: false
 }
 
 export const dashboardSlice = createSlice({
@@ -16,7 +16,7 @@ export const dashboardSlice = createSlice({
   initialState,
   reducers: {
     toggleModal: (state, action: PayloadAction<boolean>) => {
-      state.modalIsOpen = action.payload;
+      state.renderModal = action.payload;
     },
   },
 })

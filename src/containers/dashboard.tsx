@@ -1,21 +1,20 @@
 import React, { SyntheticEvent } from 'react';
 import helpers from '../helpers/fetchOptions';
 import ReactModal from 'react-modal';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { toggleModal, toggleActionCreator } from '../slices/dashboardSlice';
-import store from '../store';
+import { useAppSelector } from '../types/reduxTypes';
 
 const Dashboard = () => {
 
   const dispatch = useDispatch();
-  const action = toggleActionCreator(true);
-  // const modalValue = useSelector(state => state.modalIsOpen.value)
-  
+  const modalValue = useAppSelector(state => state.modalIsOpen.renderModal)
+
   function showAddCard(event: SyntheticEvent) {
     event.preventDefault();
-    console.log(store.getState());
+
+    const action = toggleActionCreator(!modalValue);
     dispatch(action);
-    console.log("AFTER ACTION", store.getState());
   }
 
   const customStyles = {
@@ -27,7 +26,13 @@ const Dashboard = () => {
       <form> 
         <button type="submit" className="login" onClick={showAddCard}>Add Application</button> 
       </form> 
-      <ReactModal isOpen={false} style={customStyles}>
+                                            {/* remove aria prop and set AppElement for screen readers.  */}
+      <ReactModal 
+      isOpen={modalValue} 
+      style={customStyles} 
+      ariaHideApp={false}
+      onRequestClose={showAddCard}
+      >
         HEY I RENDER
       </ReactModal>
     </div>
