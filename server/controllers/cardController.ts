@@ -11,7 +11,7 @@ const db = require('../dataModels')
 
 const cardController = {
   addCard: function(req: Request, res: Response, next: NextFunction): any { },
-  getCard: function(req: Request, res: Response, next: NextFunction): any { },
+  getCards: function(req: Request, res: Response, next: NextFunction): any { },
   deleteCard: function(req: Request, res: Response, next: NextFunction): any { }
 };
 
@@ -30,6 +30,24 @@ cardController.addCard = (req, res, next) => {
     .catch((err: any) => {
       return next({
          log: 'Error in cardController.addCard',
+         status: 500,
+         message: {err},
+      })
+    });
+};
+
+cardController.getCards = (req, res, next) => {
+  const { id } = req.params;
+  const getCards = 'SELECT * FROM opportunity WHERE user_id = $1'
+
+  db.query(getCards, [id])
+    .then((data: any) => {
+      res.locals.allCards = data.rows
+      return next()
+    })
+    .catch((err: any) => {
+      return next({
+         log: 'Error in cardController.getCards',
          status: 500,
          message: {err},
       })
