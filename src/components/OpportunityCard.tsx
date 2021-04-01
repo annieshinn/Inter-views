@@ -2,7 +2,7 @@ import React, { SyntheticEvent } from 'react';
 import helpers from '../helpers/fetchOptions';
 import ReactModal from 'react-modal';
 import { useDispatch } from 'react-redux';
-import { addOpportunity, action } from '../slices/opportinitySlice';
+// import { addOpportunity, action } from '../slices/opportinitySlice';
 import { useAppSelector } from '../types/reduxTypes';
 
 const OpportunityCard = () => {

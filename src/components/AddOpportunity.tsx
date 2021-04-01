@@ -9,7 +9,7 @@ const AddOpportunity = () => {
 
   function submitOpportunity (event: SyntheticEvent) {
     event.preventDefault
-    const options = helpers.makeFetchJSONRequest('/card')
+    // make POST request with helper
   }
 
   return (
