@@ -5,47 +5,39 @@
  */
 
 import express, { Request, Response } from "express";
-const authRouter = express.Router()
-const authController = require('./authController.ts')
-
+const authRouter = express.Router();
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-
-/* OAUTH */
-passport.use(new GoogleStrategy({
-  clientID: process.env.GOOGLE_CLIENT_ID,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "http://localhost:8000/home"
-},
-function(accessToken: any, refreshToken: any, profile: any, cb: any) {
-  console.log('hi')
-  // console.log(accessToken, refreshToken, profile, cb);
-  // User.findOrCreate({ googleId: profile.id }, function (err: any, user: any) {
-  //   return cb(err, user);
-  // });
-}
-));
-
-// POST to /auth/login
-authRouter.post('/login',
-  authController.login,
-  (req: Request, res: Response) => {
-    res.json(res.locals.message)
-});
+const authController = require('../controllers/authController.ts')
 
 // POST to /auth/signup
 authRouter.post('/signup',
   authController.signup, 
   (req: Request, res: Response) => {
-    res.json(res.locals.user)
+    res.json(res.locals.user);
 })
 
-// GET to /auth/googleSignup
-authRouter.get('/googleSignup',
-  passport.authenticate('google', {scope: ['profile']}),
-  // authController.googleSignup,
+// POST to /auth/login
+authRouter.post('/login',
+  authController.login,
   (req: Request, res: Response) => {
-    res.json({message: 'logged in'})
-  })
+    res.json(res.locals.message);
+});
+
+// GET /auth/google
+//   After authorization, Google will redirect the user
+//   back to this application at /auth/google/callback
+authRouter.get('/google',
+  passport.authenticate('google', {scope: ['profile', 'email']})
+);
+
+// GET /auth/google/callback
+//   If authentication fails, the user will be redirected back to the login page.
+//   Otherwise, the primary route function function will be called,
+authRouter.get('/google/callback', 
+  passport.authenticate('google'),
+  authController.userIdCookie,
+  function(req, res) {
+    res.cookie('user-id', res.locals.userId).redirect('/home');
+  });
 
 module.exports = authRouter;

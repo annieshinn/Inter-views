@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction, Errback } from "express";
 import path from "path";
+const passport = require('passport');
 const authRouter = require('./routers/authRouter');
 const cardRouter = require('./routers/cardRouter');
 
@@ -7,6 +8,7 @@ const PORT = 3000;
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded( {extended: true} ));
+app.use(passport.initialize());
 
 if (process.env.NODE_ENV === 'production') {
   // statically serve everything in the dist folder ONLY if production mode
