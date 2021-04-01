@@ -17,7 +17,10 @@ const cardController = {
 };
 
 cardController.addCard = (req, res, next) => {
-  const { user_id, company, event_name, event_date, phone_screen, tech_interview, status='pending' } = req.body;
+  const { company, event_name, event_date, phone_screen, tech_interview, status='pending' } = req.body;
+  const idCookie = req.headers.cookie;
+  const user_id = idCookie?.split('=').pop();
+
   const addCard = 'INSERT INTO \
   opportunity(user_id, company, event_name, event_date, phone_screen, tech_interview, status) \
   VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *'
@@ -25,8 +28,8 @@ cardController.addCard = (req, res, next) => {
   
   db.query(addCard, values)
     .then((data: any) => {
-     res.locals.newCard = data.rows[0] 
-     return next();
+      res.locals.newCard = data.rows[0] 
+      return next();
     })
     .catch((err: any) => {
       return next({
@@ -38,10 +41,11 @@ cardController.addCard = (req, res, next) => {
 };
 
 cardController.getCards = (req, res, next) => {
-  const { id } = req.params;
+  const idCookie = req.headers.cookie;
+  const user_id = idCookie?.split('=').pop();
   const getCards = 'SELECT * FROM opportunity WHERE user_id = $1'
 
-  db.query(getCards, [id])
+  db.query(getCards, [user_id])
     .then((data: any) => {
       res.locals.allCards = data.rows
       return next()

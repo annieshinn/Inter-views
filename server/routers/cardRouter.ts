@@ -16,7 +16,7 @@ cardRouter.post('/',
 });
 
 // GET to get all the cards (to render on front-end)
-cardRouter.get('/:id',
+cardRouter.get('/',
   cardController.getCards,
   (req: Request, res: Response) => {
     res.json(res.locals.allCards)
