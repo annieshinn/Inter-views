@@ -9,7 +9,22 @@ const authRouter = express.Router()
 const authController = require('./authController.ts')
 
 const passport = require('passport');
-// const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
+/* OAUTH */
+passport.use(new GoogleStrategy({
+  clientID: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  callbackURL: "http://localhost:8000/home"
+},
+function(accessToken: any, refreshToken: any, profile: any, cb: any) {
+  console.log('hi')
+  // console.log(accessToken, refreshToken, profile, cb);
+  // User.findOrCreate({ googleId: profile.id }, function (err: any, user: any) {
+  //   return cb(err, user);
+  // });
+}
+));
 
 // POST to /auth/login
 authRouter.post('/login',
