@@ -11,8 +11,15 @@ const Login = () => {
   const login = (event: SyntheticEvent) => {
     event.preventDefault();
 
-    const action = createActionLogin(['user', 'pass']);
-    dispatch(action);
+    fetch('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({username: usernameValue, password: passwordValue}),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+      .then((data) => console.log('Fetch success', data))
+      .catch((err) => console.log({message: 'error in login request', err,}));
   }
 
   const usernameOnChange = (value: string) => {
