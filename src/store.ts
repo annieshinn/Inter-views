@@ -1,10 +1,10 @@
  import { configureStore } from '@reduxjs/toolkit';
- import submitCredentials from './slices/signupSlice';
+ import authReducer from './slices/authSlice';
  import dashboardReducer from './slices/dashboardSlice';
 
  const store = configureStore({
    reducer: {
-    signup: submitCredentials,
+    authenticate: authReducer,
     modalIsOpen: dashboardReducer,
    }
  });
